@@ -46,4 +46,5 @@ func _on_use_inventory_item() -> void:
 
 
 func _toggle_description(display: bool) -> void:
+	Cursor.set_cursor(cursor if display else null)
 	InterfaceEvents.emit_signal('show_info_requested', description if display else '')

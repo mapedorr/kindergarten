@@ -7,6 +7,8 @@ onready var _display_box: Label = find_node('DisplayBox')
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos de Godot ░░░░
 func _ready():
+#	add_child(Cursor)
+	
 	_info_bar.text = ''
 	_display_box.text = ''
 	_display_box.hide()

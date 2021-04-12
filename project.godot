@@ -69,8 +69,8 @@ config/icon="res://icon.png"
 [autoload]
 
 Data="*res://src/Autoload/Data.gd"
-Cursor="*res://src/Autoload/Cursor.gd"
 Utils="*res://src/Autoload/Utils.gd"
+Cursor="*res://src/Autoload/Cursor.tscn"
 InterfaceEvents="*res://src/Autoload/InterfaceEvents.gd"
 WorldEvents="*res://src/Autoload/WorldEvents.gd"
 
@@ -91,7 +91,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/aseprite_importer/plugin.cfg" )
+enabled=PoolStringArray( "AsepriteWizard", "aseprite_importer" )
 
 [importer_defaults]
 

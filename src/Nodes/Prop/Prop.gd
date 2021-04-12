@@ -30,7 +30,12 @@ func _ready():
 func _process(delta):
 	if Engine.editor_hint:
 		if walk_to_point != get_node('WalkToHelper').position:
+			# Esto debería ocurrir sólo si se cambiar en el editor la posición
+			# del WalkToHelper
 			walk_to_point = get_node('WalkToHelper').position
+			property_list_changed_notify()
+		elif baseline != get_node('BaselineHelper').position.y:
+			baseline = get_node('BaselineHelper').position.y
 			property_list_changed_notify()
 
 
@@ -58,6 +63,7 @@ func _on_use_inventory_item() -> void:
 
 
 func _toggle_description(display: bool) -> void:
+	Cursor.set_cursor(cursor if display else null)
 	InterfaceEvents.emit_signal('show_info_requested', description if display else '')
 
 
