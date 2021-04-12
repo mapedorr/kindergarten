@@ -2,6 +2,9 @@ tool
 class_name Hotspot
 extends Area2D
 
+signal interacted
+signal looked
+
 export var description := ''
 export var baseline := 0
 export var clickable := true
@@ -30,10 +33,12 @@ func _check_input_type(_viewport: Node, event: InputEvent, _shape_idx: int) -> v
 
 func _on_interact() -> void:
 	prints('Interactuar con:', description)
+	emit_signal('interacted')
 
 
 func _on_look() -> void:
 	prints('Observar:', description)
+	emit_signal('looked')
 
 
 func _on_use_inventory_item() -> void:

@@ -3,9 +3,12 @@ class_name Room
 extends Node2D
 # Nodo base para la creación de habitaciones dentro del juego.
 
+# TODO: Tal vez estas podrían reducirse a dos señales: item_interacted y item_looked.
+# Y los Props y Hotspots podrían heredar de Item.
 signal prop_interacted(prop)
 signal prop_looked(prop)
 signal hotspot_interacted(hotspot)
+signal hotspot_looked(hotspot)
 
 var _props := []
 var _hotspots := []
@@ -23,6 +26,17 @@ func _ready():
 			prop.connect('looked', self, 'emit_signal', ['prop_looked', p])
 
 			_props.append(prop)
+	
+	for h in $Hotspots.get_children():
+		var hotspot: Hotspot = h
+		hotspot.connect(
+			'interacted', self, 'emit_signal', ['hotspot_interacted', hotspot]
+		)
+		hotspot.connect(
+			'looked', self, 'emit_signal', ['hotspot_looked', hotspot]
+		)
+		
+		_hotspots.append(hotspot)
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos públicos ░░░░
