@@ -5,8 +5,8 @@ extends Node2D
 
 # TODO: Tal vez estas podrían reducirse a dos señales: item_interacted y item_looked.
 # Y los Props y Hotspots podrían heredar de Item.
-signal prop_interacted(prop)
-signal prop_looked(prop)
+signal prop_interacted(prop, msg)
+signal prop_looked(prop, msg)
 signal hotspot_interacted(hotspot)
 signal hotspot_looked(hotspot)
 
@@ -20,10 +20,8 @@ func _ready():
 		# TODO: Esta validación de baseline no será necesaria cuando sean Props
 		if p.get('baseline'):
 			var prop: Prop = p as Prop
-			prop.connect(
-				'interacted', self, 'emit_signal', ['prop_interacted', p]
-			)
-			prop.connect('looked', self, 'emit_signal', ['prop_looked', p])
+			prop.connect('interacted', self, '_on_prop_interacted', [p])
+			prop.connect('looked', self, '_on_prop_looked', [p])
 
 			_props.append(prop)
 	
@@ -46,9 +44,19 @@ func get_walkable_area() -> Navigation2D:
 
 func character_moved(chr: Character) -> void:
 	for p in _props:
-		var prop: Node2D = p
-		var baseline: float = prop.to_global(Vector2.DOWN * prop.baseline).y
-		if baseline > chr.global_position.y:
-			p.z_index = 1
-		else:
-			p.z_index = 0
+		if p:
+			var prop: Node2D = p
+			var baseline: float = prop.to_global(Vector2.DOWN * prop.baseline).y
+			if baseline > chr.global_position.y:
+				p.z_index = 1
+			else:
+				p.z_index = 0
+
+
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
+func _on_prop_interacted(msg: String, prop: Prop) -> void:
+	emit_signal('prop_interacted', prop, msg)
+
+
+func _on_prop_looked(msg: String, prop: Prop) -> void:
+	emit_signal('prop_looked', prop, msg)

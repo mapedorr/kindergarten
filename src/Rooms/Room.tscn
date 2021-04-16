@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Rooms/Room.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rooms/forest/Back_0.png" type="Texture" id=2]
 [ext_resource path="res://src/Nodes/Hotspot/Hotspot.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/images/rooms/forest/Well_0.png" type="Texture" id=4]
-[ext_resource path="res://src/Nodes/Prop/Prop.gd" type="Script" id=5]
+[ext_resource path="res://src/Nodes/Prop/Prop.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Rooms/Forest/Well.gd" type="Script" id=5]
 [ext_resource path="res://src/Nodes/Hotspot/Hotspot.gd" type="Script" id=6]
+[ext_resource path="res://assets/images/rooms/forest/Bucket_0.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/rooms/forest/Well_0.png" type="Texture" id=8]
+[ext_resource path="res://src/Rooms/Forest/Bucket.gd" type="Script" id=9]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( -30.2225, 16.5061, -37.3015, 14.1465, -25.5031, 12.2587, 16, 54, 147.698, 47.1821, 176.014, 70.307, 124.573, 78.8019, 5, 60, 24.5222, 11.3148, 18.3871, 18.8658, 139.203, 24.5291, 116.078, 24.0571, 100.504, 16.5061, 76.9073, 20.7536, 18.3871, 21.6975, 11, 45, -86.8549, 79.7457, -188.321, 65.5876, -195.4, 48.5979, -168.5, 36.3275, -46.7403, 26.8888, -26, 44, -32, 53, -29.2786, 20.7536, -22, 60 )
@@ -20,39 +23,37 @@ script = ExtResource( 1 )
 [node name="Bg" type="Sprite" parent="Props"]
 texture = ExtResource( 2 )
 
-[node name="Well" type="Sprite" parent="Props"]
-texture = ExtResource( 4 )
+[node name="Well" parent="Props" instance=ExtResource( 4 )]
+texture = ExtResource( 8 )
 script = ExtResource( 5 )
 description = "Pozo"
-baseline = 51
-walk_to_point = Vector2( -10, 61 )
-cursor = 1
+baseline = 56
+walk_to_point = Vector2( -9, 63 )
 
-[node name="BaselineHelper" type="Line2D" parent="Props/Well"]
-position = Vector2( 0, 51 )
-points = PoolVector2Array( -10000, 0, 10000, 0 )
-width = 1.0
+[node name="BaselineHelper" parent="Props/Well" index="0"]
+position = Vector2( 0, 56 )
 
-[node name="WalkToHelper" type="Position2D" parent="Props/Well"]
-position = Vector2( -10, 61 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="WalkToHelper" parent="Props/Well" index="1"]
+position = Vector2( -9, 63 )
 
-[node name="ColorRect" type="ColorRect" parent="Props/Well/WalkToHelper"]
-margin_left = -2.5
-margin_top = -2.5
-margin_right = 2.5
-margin_bottom = 2.5
-color = Color( 0, 1, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Well/Area2D" index="0"]
+polygon = PoolVector2Array( -24, 50, -17, 55, -1, 55, 7, 52, 9, 14, 5, 2, -18, 4, -21, 15 )
 
-[node name="Area2D" type="Area2D" parent="Props/Well"]
+[node name="Bucket" parent="Props" instance=ExtResource( 4 )]
+texture = ExtResource( 7 )
+script = ExtResource( 9 )
+description = "Balde"
+baseline = 58
+walk_to_point = Vector2( 102, 51 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Well/Area2D"]
-polygon = PoolVector2Array( -23.4536, 50.0124, -14.2765, 55.0181, -1.76242, 54.6844, 7.08089, 52.1815, 9.41687, 14.9729, 5.07864, 3.29301, -17.6136, 3.96044, -20.9507, 14.806 )
+[node name="BaselineHelper" parent="Props/Bucket" index="0"]
+position = Vector2( 0, 58 )
+
+[node name="WalkToHelper" parent="Props/Bucket" index="1"]
+position = Vector2( 102, 51 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Bucket/Area2D" index="0"]
+polygon = PoolVector2Array( 97, 49, 99, 58, 105, 58, 108, 52, 106, 47, 101, 47 )
 
 [node name="Hotspots" type="Node2D" parent="."]
 
@@ -81,3 +82,7 @@ polygon = PoolVector2Array( -195, -73, -148, -63, -98, -65, -47, -52, -18, -63, 
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="WalkableAreas/Navigation2D"]
 navpoly = SubResource( 1 )
+
+[editable path="Props/Well"]
+
+[editable path="Props/Bucket"]

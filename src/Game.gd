@@ -55,6 +55,9 @@ func move_along_path(distance):
 
 	character.position = last_point
 	character.idle()
+	
+	WorldEvents.emit_signal('character_move_ended', character)
+
 	set_process(false)
 
 
@@ -64,16 +67,15 @@ func _update_navigation_path(start_position, end_position):
 	set_process(true)
 
 
-func _on_room_prop_interacted(prop: Prop) -> void:
+func _on_room_prop_interacted(prop: Prop, msg: String) -> void:
 	_update_navigation_path(character.position, prop.walk_to_point)
 
 
-func _on_room_prop_looked(prop: Prop) -> void:
-	WorldEvents.emit_signal(
-		'character_spoke',
-		character,
-		'Eso es un prop de la habitación y se llama: %s' % prop.description.to_lower()
-	)
+func _on_room_prop_looked(prop: Prop, msg: String) -> void:
+	var text: String = 'Eso es un prop de la habitación y se llama: %s' % prop.description.to_lower()
+	if msg:
+		text = msg
+	WorldEvents.emit_signal('character_spoke', character, text)
 
 
 func _on_room_hotspot_looked(hotspot: Hotspot) -> void:

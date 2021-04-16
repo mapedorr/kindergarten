@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Nodes/Hotspot/Hotspot.gd"
 }, {
+"base": "Control",
+"class": "Item",
+"language": "GDScript",
+"path": "res://src/Inventory/Item.gd"
+}, {
 "base": "Sprite",
 "class": "Prop",
 "language": "GDScript",
@@ -56,6 +61,7 @@ _global_script_class_icons={
 "Character": "",
 "EditorTheme": "",
 "Hotspot": "",
+"Item": "",
 "Prop": "",
 "Room": ""
 }
@@ -73,6 +79,7 @@ Utils="*res://src/Autoload/Utils.gd"
 Cursor="*res://src/Autoload/Cursor.tscn"
 InterfaceEvents="*res://src/Autoload/InterfaceEvents.gd"
 WorldEvents="*res://src/Autoload/WorldEvents.gd"
+Inventory="*res://src/Inventory/Inventory.tscn"
 
 [debug]
 
