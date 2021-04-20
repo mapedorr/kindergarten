@@ -1,16 +1,18 @@
 class_name Character
-extends Node2D
+extends Clickable
+# Cualquier objeto que pueda hablar, caminar, moverse entre habitaciones, tener
+# inventario, entre otras muchas cosas.
 
 # TODO: Crear la máquina de estados
 
 signal started_walk_to(start, end)
 
-export var description := ''
 export var text_color := Color.white
 export var walk_speed := 200.0
-export var script_name := ''
+export var is_player := false
 
 onready var sprite: Sprite = $Sprite
+
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos de Godot ░░░░
 func _ready():

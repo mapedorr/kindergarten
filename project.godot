@@ -24,10 +24,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/aseprite_importer/classes/AsepriteImporter.gd"
 }, {
-"base": "Node2D",
+"base": "Clickable",
 "class": "Character",
 "language": "GDScript",
 "path": "res://src/Nodes/Character/Character.gd"
+}, {
+"base": "Area2D",
+"class": "Clickable",
+"language": "GDScript",
+"path": "res://src/Nodes/Clickable/Clickable.gd"
 }, {
 "base": "Resource",
 "class": "DataResource",
@@ -69,6 +74,7 @@ _global_script_class_icons={
 "AsepriteImportData": "",
 "AsepriteImporter": "",
 "Character": "",
+"Clickable": "",
 "DataResource": "",
 "DialogMenu": "",
 "EditorTheme": "",

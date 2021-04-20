@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://src/Nodes/Character/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Characters/Dave/Dave.gd" type="Script" id=2]
-[ext_resource path="res://assets/images/characters/dave/powerquest-dave.png" type="Texture" id=3]
+[ext_resource path="res://src/Characters/Barney/Barney.gd" type="Script" id=1]
+[ext_resource path="res://src/Nodes/Character/Character.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/images/characters/barney/powerquest-barney.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.1
@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 0, 0, 48, 64 ) ]
+"values": [ Rect2( 0, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -28,7 +28,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -43,7 +43,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 48, 0, 48, 64 ) ]
+"values": [ Rect2( 80, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -55,7 +55,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -70,7 +70,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 96, 0, 48, 64 ) ]
+"values": [ Rect2( 160, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -82,7 +82,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -97,7 +97,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 144, 0, 48, 64 ) ]
+"values": [ Rect2( 240, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -109,7 +109,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -124,7 +124,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Rect2( 192, 0, 48, 64 ), Rect2( 240, 0, 48, 64 ) ]
+"values": [ Rect2( 320, 0, 80, 80 ), Rect2( 400, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -136,7 +136,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ), Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -151,7 +151,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Rect2( 288, 0, 48, 64 ), Rect2( 336, 0, 48, 64 ), Rect2( 384, 0, 48, 64 ) ]
+"values": [ Rect2( 480, 0, 80, 80 ), Rect2( 560, 0, 80, 80 ), Rect2( 640, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -163,7 +163,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ), Vector2( 0, 8 ), Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -178,7 +178,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Rect2( 432, 0, 48, 64 ), Rect2( 480, 0, 48, 64 ) ]
+"values": [ Rect2( 720, 0, 80, 80 ), Rect2( 800, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -190,7 +190,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ), Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -205,7 +205,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Rect2( 528, 0, 48, 64 ), Rect2( 576, 0, 48, 64 ) ]
+"values": [ Rect2( 880, 0, 80, 80 ), Rect2( 960, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -217,7 +217,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ), Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -232,7 +232,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Rect2( 624, 0, 48, 64 ), Rect2( 672, 0, 48, 64 ), Rect2( 720, 0, 48, 64 ), Rect2( 768, 0, 48, 64 ) ]
+"values": [ Rect2( 1040, 0, 80, 80 ), Rect2( 1120, 0, 80, 80 ), Rect2( 1200, 0, 80, 80 ), Rect2( 1280, 0, 80, 80 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -244,16 +244,16 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 8 ), Vector2( 0, 8 ), Vector2( 0, 8 ), Vector2( 0, 8 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 
-[node name="Dave" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
-description = "Davincho"
-clickable = false
-script_name = "Dave"
-text_color = Color( 0.85098, 0.341176, 0.388235, 1 )
-is_player = true
+[node name="Barney" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+description = "Bernardo"
+cursor = 1
+
+[node name="CollisionPolygon2D" parent="." index="0"]
+polygon = PoolVector2Array( -7, -28, -5, 0, 5, 0, 6, -26, 2, -40, -3, -39 )
 
 [node name="AnimationPlayer" parent="." index="1"]
 anims/idle_d = SubResource( 1 )
@@ -269,6 +269,5 @@ anims/walk_r = SubResource( 9 )
 [node name="Sprite" parent="." index="2"]
 position = Vector2( 0, -30 )
 texture = ExtResource( 3 )
-offset = Vector2( 0, 8 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 48, 64 )
+region_rect = Rect2( 0, 0, 80, 80 )

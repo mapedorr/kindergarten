@@ -1,20 +1,35 @@
 class_name DialogMenu
 extends Container
 
+signal shown
+signal hidden
+
 var current_options := []
 
 var _option: PackedScene = load('res://src/Interface/DialogMenu/DialogOption.tscn')
 
-onready var _container: Container = find_node('OptionsContainer')
+onready var _panel: Container = find_node('Panel')
+onready var _options: Container = find_node('Options')
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos de Godot ░░░░
 func _ready() -> void:
+	connect('gui_input', self, '_clicked')
+	
+	# Conectarse a eventos de los evnetruchos
 	I.connect('show_inline_dialog', self, '_create_options', [true])
+
 	hide()
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
+func _clicked(event: InputEvent) -> void:
+	var mouse_event: = event as InputEventMouseButton
+	if mouse_event and mouse_event.button_index == BUTTON_LEFT \
+		and mouse_event.pressed:
+			prints('AaAaA')
+
+
 func _create_options(options := [], autoshow := false) -> void:
 	remove_options()
 
@@ -30,7 +45,7 @@ func _create_options(options := [], autoshow := false) -> void:
 		btn.text = opt
 #		btn.connect('pressed', self, '_on_option_clicked', [opt])
 
-		_container.add_child(btn)
+		_options.add_child(btn)
 
 #		if opt.has('show') and not opt.show:
 #			opt.show = false
@@ -41,22 +56,22 @@ func _create_options(options := [], autoshow := false) -> void:
 	if autoshow: show_options()
 	
 	yield(get_tree(), 'idle_frame')
-	prints(_container.rect_size.y, Data.game_height - _container.rect_size.y)
-	rect_size.y = _container.rect_size.y
-	rect_position.y = Data.game_height - _container.rect_size.y
+
+	_panel.rect_min_size.y = _options.rect_size.y
+#	_panel.rect_position.y = Data.game_height - _options.rect_size.y
 #
 #
 func remove_options() -> void:
 	if not current_options.empty():
 		current_options.clear()
 
-		for btn in _container.get_children():
+		for btn in _options.get_children():
 #			(btn as Button).call_deferred('queue_free')
-			_container.remove_child(btn as Button)
+			_options.remove_child(btn as Button)
 #		hide()
 	
-	rect_size.y = 0
-	_container.rect_size.y = 0
+	_panel.rect_size.y = 0
+	_options.rect_size.y = 0
 #
 #
 #func update_options(updates_cfg := {}) -> void:
@@ -84,6 +99,7 @@ func show_options() -> void:
 	# una flecha del teclado
 
 	show()
+	emit_signal('shown')
 #
 #
 #func _on_option_clicked(opt: Dictionary) -> void:
