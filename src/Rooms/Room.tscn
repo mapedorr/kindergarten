@@ -2,10 +2,10 @@
 
 [ext_resource path="res://src/Rooms/Room.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/rooms/forest/Back_0.png" type="Texture" id=2]
-[ext_resource path="res://src/Nodes/Hotspot/Hotspot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Rooms/Forest/Cave.gd" type="Script" id=3]
 [ext_resource path="res://src/Nodes/Prop/Prop.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Rooms/Forest/Well.gd" type="Script" id=5]
-[ext_resource path="res://src/Nodes/Hotspot/Hotspot.gd" type="Script" id=6]
+[ext_resource path="res://src/Rooms/Forest/Forest.gd" type="Script" id=6]
 [ext_resource path="res://assets/images/rooms/forest/Bucket_0.png" type="Texture" id=7]
 [ext_resource path="res://assets/images/rooms/forest/Well_0.png" type="Texture" id=8]
 [ext_resource path="res://src/Rooms/Forest/Bucket.gd" type="Script" id=9]
@@ -57,24 +57,29 @@ polygon = PoolVector2Array( 97, 49, 99, 58, 105, 58, 108, 52, 106, 47, 101, 47 )
 
 [node name="Hotspots" type="Node2D" parent="."]
 
-[node name="Cave" parent="Hotspots" instance=ExtResource( 3 )]
+[node name="Cueva" type="Area2D" parent="Hotspots"]
+collision_mask = 0
+script = ExtResource( 3 )
 description = "Cueva"
 cursor = 9
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Cave"]
-polygon = PoolVector2Array( 74.6766, 16.9716, 94.2274, 12.3466, 108.733, 13.1875, 114.199, 18.2329, 115.46, -7.20419, 105.79, -16.2438, 87.2901, -16.4541, 79.0913, -10.5678, 80.3527, 1.20477 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Cueva"]
+polygon = PoolVector2Array( 75, 16, 86, 12, 105, 12, 114, 18, 115, -7, 107, -15, 86, -16, 78, -10 )
 
 [node name="Forest" type="Area2D" parent="Hotspots"]
 script = ExtResource( 6 )
 description = "Bosque"
-baseline = 50
+cursor = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hotspots/Forest"]
-polygon = PoolVector2Array( -195, -73, -148, -63, -98, -65, -47, -52, -18, -63, 10, -56, 60, -67, 93, -58, 94, -46, 74, -40, 64, -19, 46, -4, -20, -5, -61, 3, -133, 16, -198, 17 )
+polygon = PoolVector2Array( 49, 2, 14, 1, -48, 4, -190, 25, -197, -81, -158, -62, -117, -64, -108, -74, -68, -54, -54, -59, -29, -47, -24, -70, -4, -57, 7, -64, 18, -60, 33, -67, 47, -68, 60, -72, 79, -64, 93, -62, 88, -47, 70, -34 )
 
 [node name="Regions" type="Node2D" parent="."]
 
 [node name="Points" type="Node2D" parent="."]
+
+[node name="EntryPoint" type="Position2D" parent="Points"]
+position = Vector2( -110, 49 )
 
 [node name="WalkableAreas" type="Node2D" parent="."]
 
@@ -84,5 +89,4 @@ polygon = PoolVector2Array( -195, -73, -148, -63, -98, -65, -47, -52, -18, -63, 
 navpoly = SubResource( 1 )
 
 [editable path="Props/Well"]
-
 [editable path="Props/Bucket"]

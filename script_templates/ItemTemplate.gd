@@ -2,7 +2,7 @@ extends 'res://src/Inventory/Item.gd'
 
 # Cuando se le hace clic en el inventario
 func on_interact() -> void:
-	prints('aaaaaaaaaaaaaa')
+	pass
 
 
 # Lo que pasará cuando se haga clic derecho en el icono del inventario

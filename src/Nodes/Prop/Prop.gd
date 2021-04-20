@@ -1,6 +1,8 @@
 tool
 class_name Prop
 extends Sprite
+# Elementos visuales para las habitaciones. Pueden tener interacción.
+# Ej: las imágenes de fondo y primer plano, un objeto que se puede agarrar...
 
 signal interacted(msg)
 signal looked(msg)
@@ -18,9 +20,10 @@ onready var _collider: Area2D = $Area2D
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos de Godot ░░░░
 func _ready():
-	_collider.connect('input_event', self, '_check_input_type')
 	_collider.connect('mouse_entered', self, '_toggle_description', [true])
 	_collider.connect('mouse_exited', self, '_toggle_description', [false])
+	
+	set_process_unhandled_input(false)
 	
 	if not Engine.editor_hint:
 		remove_child($BaselineHelper)
@@ -39,6 +42,18 @@ func _process(delta):
 			property_list_changed_notify()
 
 
+func _unhandled_input(event):
+	var mouse_event: = event as InputEventMouseButton 
+	if mouse_event and mouse_event.pressed:
+		if event.is_action_pressed('interact'):
+			# TODO: Verificar si hay un elemento de inventario seleccionado
+			Data.clicked = self
+			get_tree().set_input_as_handled()
+			on_interact()
+		elif event.is_action_pressed('look'):
+			on_look()
+
+
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos públicos ░░░░
 func on_interact() -> void:
 	_on_interact()
@@ -49,16 +64,6 @@ func on_look() -> void:
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
-func _check_input_type(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	var mouse_event: = event as InputEventMouseButton 
-	if mouse_event:
-		if event.is_action_pressed('interact'):
-			# TODO: Verificar si hay un elemento de inventario seleccionado
-			on_interact()
-		elif event.is_action_pressed('look'):
-			on_look()
-
-
 func _on_interact(msg := '') -> void:
 	emit_signal('interacted', msg)
 
@@ -72,8 +77,9 @@ func _on_use_inventory_item(msg := '') -> void:
 
 
 func _toggle_description(display: bool) -> void:
+	set_process_unhandled_input(display)
 	Cursor.set_cursor(cursor if display else null)
-	InterfaceEvents.emit_signal('show_info_requested', description if display else '')
+	I.emit_signal('show_info_requested', description if display else '')
 
 
 func _set_baseline(value: int) -> void:

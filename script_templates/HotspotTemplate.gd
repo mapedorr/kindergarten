@@ -1,5 +1,5 @@
 tool
-extends 'res://src/Nodes/Prop/Prop.gd'
+extends "res://src/Nodes/Hotspot/Hotspot.gd"
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos virtuales ░░░░

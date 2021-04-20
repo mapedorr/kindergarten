@@ -29,6 +29,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Nodes/Character/Character.gd"
 }, {
+"base": "Resource",
+"class": "DataResource",
+"language": "GDScript",
+"path": "res://src/Resources/DataResource.gd"
+}, {
+"base": "Container",
+"class": "DialogMenu",
+"language": "GDScript",
+"path": "res://src/Interface/DialogMenu/DialogMenu.gd"
+}, {
 "base": "Node",
 "class": "EditorTheme",
 "language": "GDScript",
@@ -59,6 +69,8 @@ _global_script_class_icons={
 "AsepriteImportData": "",
 "AsepriteImporter": "",
 "Character": "",
+"DataResource": "",
+"DialogMenu": "",
 "EditorTheme": "",
 "Hotspot": "",
 "Item": "",
@@ -77,8 +89,8 @@ config/icon="res://icon.png"
 Data="*res://src/Autoload/Data.gd"
 Utils="*res://src/Autoload/Utils.gd"
 Cursor="*res://src/Autoload/Cursor.tscn"
-InterfaceEvents="*res://src/Autoload/InterfaceEvents.gd"
-WorldEvents="*res://src/Autoload/WorldEvents.gd"
+I="*res://src/Autoload/InterfaceEvents.gd"
+C="*res://src/Autoload/CharacterInterface.gd"
 Inventory="*res://src/Inventory/Inventory.tscn"
 
 [debug]
@@ -126,15 +138,20 @@ texture={
 [input]
 
 interact={
-"deadzone": 0.5,
+"deadzone": 0.2,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 look={
-"deadzone": 0.5,
+"deadzone": 0.2,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+
+[locale]
+
+fallback="es"
+translations=PoolStringArray( "res://assets/localization/localization.es.translation", "res://assets/localization/localization.en.translation" )
 
 [physics]
 
