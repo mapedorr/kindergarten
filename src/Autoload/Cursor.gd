@@ -22,6 +22,7 @@ func _ready():
 
 func _process(delta):
 	$AnimatedSprite.position = $AnimatedSprite.get_global_mouse_position()
+	$Sprite.position = $AnimatedSprite.get_global_mouse_position()
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos públicos ░░░░
@@ -30,3 +31,15 @@ func set_cursor(type := Type.IDLE) -> void:
 	if Type.values().has(type):
 		anim_name = Type.keys()[type]
 	$AnimatedSprite.play(anim_name.to_lower())
+
+
+func set_item_cursor(texture: Texture) -> void:
+	$AnimatedSprite.hide()
+	$Sprite.texture = texture
+	$Sprite.show()
+
+
+func remove_item_cursor() -> void:
+	$AnimatedSprite.show()
+	$Sprite.texture = null
+	$Sprite.hide()

@@ -49,7 +49,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/aseprite_importer/classes/EditorTheme.gd"
 }, {
-"base": "Area2D",
+"base": "Clickable",
 "class": "Hotspot",
 "language": "GDScript",
 "path": "res://src/Nodes/Hotspot/Hotspot.gd"
@@ -95,9 +95,9 @@ config/icon="res://icon.png"
 Data="*res://src/Autoload/Data.gd"
 Utils="*res://src/Autoload/Utils.gd"
 Cursor="*res://src/Autoload/Cursor.tscn"
-I="*res://src/Autoload/InterfaceEvents.gd"
+G="*res://src/Autoload/InterfaceEvents.gd"
 C="*res://src/Autoload/CharacterInterface.gd"
-Inventory="*res://src/Inventory/Inventory.tscn"
+I="*res://src/Inventory/Inventory.tscn"
 
 [debug]
 

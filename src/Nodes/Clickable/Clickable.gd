@@ -17,8 +17,6 @@ export var look_at_point: Vector2
 export(Cursor.Type) var cursor
 export var script_name := ''
 
-var coco := name
-
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos de Godot ░░░░
 func _ready():
@@ -35,7 +33,10 @@ func _unhandled_input(event):
 		if event.is_action_pressed('interact'):
 			# TODO: Verificar si hay un elemento de inventario seleccionado
 			get_tree().set_input_as_handled()
-			on_interact()
+			if I.active:
+				on_item_used(I.active)
+			else:
+				on_interact()
 		elif event.is_action_pressed('look'):
 			on_look()
 
@@ -46,6 +47,10 @@ func on_interact() -> void:
 
 
 func on_look() -> void:
+	pass
+
+
+func on_item_used(item: Item) -> void:
 	pass
 
 
@@ -66,5 +71,5 @@ func _on_use_inventory_item() -> void:
 func _toggle_description(display: bool) -> void:
 	set_process_unhandled_input(display)
 	Cursor.set_cursor(cursor if display else null)
-	I.emit_signal('show_info_requested', description if display else '')
+	G.emit_signal('show_info_requested', description if display else '')
 

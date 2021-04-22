@@ -17,7 +17,6 @@ onready var sprite: Sprite = $Sprite
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos de Godot ░░░░
 func _ready():
 	# Conectarse a señales del cielo
-	C.connect('character_say', self, '_check_say')
 	C.connect('character_walk_to', self, '_check_walk')
 	
 	idle()
@@ -51,13 +50,12 @@ func face_right() -> void:
 	$Sprite.flip_h = false
 
 
+func say(dialog: String) -> void:
+	C.emit_signal('character_spoke', self, dialog)
+	$AnimationPlayer.play('talk_d')
+
+
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
-func _check_say(chr_name: String, dialog: String) -> void:
-	if chr_name.to_lower() == script_name.to_lower():
-		C.emit_signal('character_spoke', self, dialog)
-		$AnimationPlayer.play('talk_d')
-
-
 func _check_walk(n: String, t: Vector2) -> void:
 	if n.to_lower() == script_name.to_lower():
 		emit_signal('started_walk_to', position, t)

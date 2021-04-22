@@ -18,6 +18,10 @@ onready var _nav_path: Navigation2D = $WalkableAreas.get_child(0)
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos de Godot ░░░░
 func _ready():
 	for c in $Characters.get_children():
+		# TODO: Esto debería ocurrir sólo una vez en el Game cuando encuentre
+		# el modo de acceder a todos los nodos dentro de la carpeta Characters.
+		C.characters.append(c)
+
 		if (c as Character).is_player:
 			Data.player = c.script_name
 			C.player = c
@@ -70,17 +74,18 @@ func on_room_entered() -> void:
 	# Algo así tendrían que quedar los guiones cuando se están programando
 	# interacciones.
 	C.player.global_position = $Points/EntryPoint.global_position
-	yield(I.display('DLG_A'), 'completed')
-	yield(C.player_say('Bueno. Hay que empezar con algo'), 'completed')
-	yield(get_tree().create_timer(1.0), 'timeout')
-	C.player.face_up()
-	yield(get_tree().create_timer(1.0), 'timeout')
-	C.player.face_left()
-	yield(get_tree().create_timer(1.0), 'timeout')
-	C.player.face_right()
-	yield(get_tree().create_timer(1.0), 'timeout')
-	yield(C.player_say('Lo importante es empezar'), 'completed')
-	I.done()
+#	yield(G.display('DLG_A'), 'completed')
+#	yield(C.player_say('Bueno. Hay que empezar con algo'), 'completed')
+#	yield(C.character_say('Barney', 'Cállese maricón!'), 'completed')
+#	yield(get_tree().create_timer(1.0), 'timeout')
+#	C.player.face_up()
+#	yield(get_tree().create_timer(1.0), 'timeout')
+#	C.player.face_left()
+#	yield(get_tree().create_timer(1.0), 'timeout')
+#	C.player.face_right()
+#	yield(get_tree().create_timer(1.0), 'timeout')
+#	yield(C.player_say('Lo importante es empezar'), 'completed')
+#	G.done()
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
@@ -133,7 +138,7 @@ func _on_prop_looked(msg: String, prop: Prop) -> void:
 
 
 func _hotspot_looked(hotspot: Hotspot) -> void:
-	I.emit_signal(
+	G.emit_signal(
 		'show_box_requested',
 		'Estás viendo: %s' % hotspot.description
 	)

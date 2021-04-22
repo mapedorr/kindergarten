@@ -6,11 +6,14 @@ var _interacted := false
 
 func on_interact() -> void:
 	yield(C.walk_to_clicked(), 'completed')
-	C.player_say('Uy, un balde re-áspero')
-	yield(get_tree().create_timer(1.0), 'timeout')
+	yield(C.player_say('Uy, un balde re-áspero'), 'completed')
+	yield(get_tree().create_timer(0.2), 'timeout')
 	get_parent().remove_child(self)
+	yield(I.add_item('Bucket'), 'completed')
+	yield(C.player_say('¡Ora sí! Ya verán de lo que soy capaz.'), 'completed')
+	yield(C.character_say('Barney', '¡Cállese maricón!'), 'completed')
+	G.done()
 	queue_free()
-	Inventory.add_item('Bucket')
 
 
 func on_look() -> void:

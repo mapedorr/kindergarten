@@ -3,6 +3,9 @@ class_name Item
 # Estos son los objetos que podrán ir al inventario:
 # InterfaceLayer > InventoryContainer > ... > InventoryGrid
 
+signal description_toggled(description)
+signal selected(item)
+
 export var description := ''
 export var stack := false
 export var script_name := ''
@@ -15,6 +18,7 @@ var amount = 1
 func _ready():
 	connect('mouse_entered', self, '_toggle_description', [true])
 	connect('mouse_exited', self, '_toggle_description', [false])
+	connect('gui_input', self, '_on_action_pressed')
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos públicos ░░░░
@@ -36,4 +40,11 @@ func on_use_item() -> void:
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
 func _toggle_description(display: bool) -> void:
 	Cursor.set_cursor(cursor if display else null)
-	I.emit_signal('show_info_requested', description if display else '')
+	G.show_info(description if display else '')
+	emit_signal('description_toggled', description if display else '')
+
+
+func _on_action_pressed(event: InputEvent) -> void: 
+	var mouse_event: = event as InputEventMouseButton 
+	if mouse_event and mouse_event.is_action_pressed('interact'):
+		emit_signal('selected', self)

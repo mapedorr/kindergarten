@@ -1,15 +1,11 @@
 extends CanvasLayer
 
-var _can_hide_inventory := true
 var _is_inventory_hidden := false
 
 onready var _info_bar: Label = find_node('InfoBar')
 onready var _dialog_text: AnimatedRichText = find_node('DialogText')
 onready var _display_box: Label = find_node('DisplayBox')
-onready var _inventory: NinePatchRect = find_node('InventoryContainer')
-onready var _inventory_hide_y := _inventory.rect_position.y - (_inventory.rect_size.y - 3.5)
-onready var _inventory_foreground: TextureRect = find_node('InventoryForeground')
-onready var _inventory_grid: GridContainer = find_node('InventoryGrid')
+onready var _inventory_container: NinePatchRect = find_node('InventoryContainer')
 onready var _click_handler: Button = $MainContainer/ClickHandler
 onready var _dialog_menu: DialogMenu = find_node('DialogMenu')
 
@@ -21,19 +17,9 @@ func _ready():
 	_display_box.text = ''
 	_display_box.hide()
 	
-	_inventory.rect_position.y = _inventory_hide_y
-	_inventory.rect_size.x = _inventory_foreground.rect_size.x
-	
-	for i in _inventory_grid.get_children():
-		(i as TextureRect).connect('mouse_entered', self, '_show_item_info', [true])
-		(i as TextureRect).connect('mouse_exited', self, '_show_item_info', [false])
-	
 	# --------------------------------------------------------------------------
 	# Conectarse a eventos de los hijos
 	# TODO: Algunos de estos realmente irán en el script de cada hijo
-	_inventory.connect('mouse_entered', self, '_toggle_inventory', [true])
-	_inventory.connect('mouse_exited', self, '_toggle_inventory', [false])
-	_inventory.connect('item_added', self, '_tmp')
 	_click_handler.connect('pressed', self, '_continue')
 	_dialog_menu.connect('shown', self, '_hide_panels', [{blocking = false}])
 	
@@ -41,9 +27,9 @@ func _ready():
 	# Conectarse a eventos del universo digimon
 	C.connect('character_spoke', self, '_show_dialog_text')
 #	C.connect('character_moved', self, '_hide_interface_elements')
-	I.connect('show_info_requested', self, '_update_info_bar')
-	I.connect('show_box_requested', self, '_show_display_box')
-	I.connect('freed', self, '_show_panels')
+	G.connect('show_info_requested', self, '_update_info_bar')
+	G.connect('show_box_requested', self, '_show_display_box')
+	G.connect('freed', self, '_show_panels')
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
@@ -77,38 +63,6 @@ func _hide_interface_elements(chr: Character) -> void:
 	_show_display_box()
 
 
-func _toggle_inventory(appear: bool) -> void:
-	if appear:
-		if _inventory.rect_position.y != _inventory_hide_y: return
-		$Tween.interpolate_property(
-			_inventory, 'rect_position:y',
-			_inventory_hide_y, 0.0,
-			0.5, Tween.TRANS_EXPO, Tween.EASE_OUT
-		)
-	else:
-		yield(get_tree(), 'idle_frame')
-		if not _can_hide_inventory: return
-		$Tween.interpolate_property(
-			_inventory, 'rect_position:y',
-			0.0, _inventory_hide_y,
-			0.2, Tween.TRANS_SINE, Tween.EASE_IN
-		)
-	$Tween.start()
-
-
-func _show_item_info(appear: bool) -> void:
-	_can_hide_inventory = false if appear else true
-	_update_info_bar('Balde' if appear else '')
-
-
-func _tmp(item: Item) -> void:
-	(item as Control).connect('mouse_entered', self, '_show_item_info', [true])
-	(item as Control).connect('mouse_exited', self, '_show_item_info', [false])
-	_toggle_inventory(true)
-	yield(get_tree().create_timer(2.0), 'timeout')
-	_toggle_inventory(false)
-
-
 func _hide_panels(props := { blocking = true }) -> void:
 	if props.blocking:
 		_click_handler.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -119,12 +73,7 @@ func _hide_panels(props := { blocking = true }) -> void:
 
 	_is_inventory_hidden = true
 
-	$Tween.interpolate_property(
-		_inventory, 'rect_position:y',
-		_inventory_hide_y, _inventory_hide_y - 3.5,
-		0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT
-	)
-	$Tween.start()
+	_inventory_container.disable()
 
 
 func _show_panels() -> void:
@@ -132,16 +81,11 @@ func _show_panels() -> void:
 	_is_inventory_hidden = false
 	_click_handler.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	$Tween.interpolate_property(
-		_inventory, 'rect_position:y',
-		_inventory_hide_y - 3.5, _inventory_hide_y,
-		0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT
-	)
-	$Tween.start()
+	_inventory_container.enable()
 
 
 func _continue() -> void:
 #	_info_bar.hide()
 	_display_box.hide()
 	_dialog_text.stop()
-	I.emit_signal('continue_clicked')
+	G.emit_signal('continue_clicked')

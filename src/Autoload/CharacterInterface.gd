@@ -8,17 +8,20 @@ signal character_say(chr_name, dialog)
 signal character_walk_to(chr_name, position)
 
 var player: Character
+var characters := []
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos públicos ░░░░
 func character_say(chr_name: String, dialog: String) -> void:
-	emit_signal('character_say', chr_name, dialog)
-	yield(I, 'continue_clicked')
+	var talking_character: Character = _get_character(chr_name)
+	talking_character.say(dialog)
+	yield(G, 'continue_clicked')
+	talking_character.idle()
 
 
 func player_say(dialog: String) -> void:
-	emit_signal('character_say', Data.player, dialog)
-	yield(I, 'continue_clicked')
+	player.say(dialog)
+	yield(G, 'continue_clicked')
 	player.idle()
 
 
@@ -35,3 +38,11 @@ func player_walk_to(position: Vector2) -> void:
 func walk_to_clicked() -> void:
 	yield(character_walk_to(Data.player, Data.clicked.walk_to_point), 'completed')
 # -------------------------------------- TODO: ¿Mover esto a otro Autoload? ----
+
+
+# ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
+func _get_character(script_name: String) -> Character:
+	for c in characters:
+		if (c as Character).script_name.to_lower() == script_name.to_lower():
+			return c
+	return null

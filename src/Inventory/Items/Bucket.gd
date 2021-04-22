@@ -7,7 +7,7 @@ func on_interact() -> void:
 
 # Lo que pasará cuando se haga clic derecho en el icono del inventario
 func on_look() -> void:
-	I.emit_signal('show_info_requested', 'Este es mi balde')
+	G.emit_signal('show_info_requested', 'Este es mi balde')
 
 
 # Lo que pasará cuando se use otro Item del inventario sobre este

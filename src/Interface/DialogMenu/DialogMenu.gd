@@ -17,7 +17,7 @@ func _ready() -> void:
 	connect('gui_input', self, '_clicked')
 	
 	# Conectarse a eventos de los evnetruchos
-	I.connect('show_inline_dialog', self, '_create_options', [true])
+	G.connect('show_inline_dialog', self, '_create_options', [true])
 
 	hide()
 

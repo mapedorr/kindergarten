@@ -112,6 +112,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Tween" type="Tween" parent="MainContainer/InventoryContainer"]
+
 [node name="InventoryPanel" type="MarginContainer" parent="MainContainer/InventoryContainer"]
 margin_right = 20.0
 margin_bottom = 20.0

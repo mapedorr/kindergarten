@@ -29,11 +29,11 @@ texture = ExtResource( 2 )
 texture = ExtResource( 8 )
 script = ExtResource( 5 )
 description = "Pozo"
-baseline = 56
+baseline = 45
 walk_to_point = Vector2( -9, 63 )
 
 [node name="BaselineHelper" parent="Props/Well" index="0"]
-position = Vector2( 0, 56 )
+position = Vector2( 0, 45 )
 
 [node name="WalkToHelper" parent="Props/Well" index="1"]
 position = Vector2( -9, 63 )
@@ -45,11 +45,11 @@ polygon = PoolVector2Array( -24, 50, -17, 55, -1, 55, 7, 52, 9, 14, 5, 2, -18, 4
 texture = ExtResource( 7 )
 script = ExtResource( 9 )
 description = "Balde"
-baseline = 58
+baseline = 59
 walk_to_point = Vector2( 102, 51 )
 
 [node name="BaselineHelper" parent="Props/Bucket" index="0"]
-position = Vector2( 0, 58 )
+position = Vector2( 0, 59 )
 
 [node name="WalkToHelper" parent="Props/Bucket" index="1"]
 position = Vector2( 102, 51 )
