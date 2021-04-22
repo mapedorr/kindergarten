@@ -26,36 +26,44 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Well" parent="Props" instance=ExtResource( 4 )]
-texture = ExtResource( 8 )
 script = ExtResource( 5 )
 description = "Pozo"
-baseline = 45
+baseline = 57
 walk_to_point = Vector2( -9, 63 )
+cursor = 1
+texture = ExtResource( 8 )
 
-[node name="BaselineHelper" parent="Props/Well" index="0"]
-position = Vector2( 0, 45 )
+[node name="CollisionPolygon2D" parent="Props/Well" index="0"]
+polygon = PoolVector2Array( -23, 16, -18, 3, 6, 2, 10, 12, 7, 53, -13, 57, -24, 52 )
 
-[node name="WalkToHelper" parent="Props/Well" index="1"]
+[node name="BaselineHelper" parent="Props/Well" index="1"]
+position = Vector2( 0, 57 )
+
+[node name="WalkToHelper" parent="Props/Well" index="2"]
 position = Vector2( -9, 63 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Well/Area2D" index="0"]
-polygon = PoolVector2Array( -24, 50, -17, 55, -1, 55, 7, 52, 9, 14, 5, 2, -18, 4, -21, 15 )
+[node name="Sprite" parent="Props/Well" index="3"]
+texture = ExtResource( 8 )
 
 [node name="Bucket" parent="Props" instance=ExtResource( 4 )]
-texture = ExtResource( 7 )
 script = ExtResource( 9 )
 description = "Balde"
 baseline = 59
 walk_to_point = Vector2( 102, 51 )
+cursor = 1
+texture = ExtResource( 7 )
 
-[node name="BaselineHelper" parent="Props/Bucket" index="0"]
+[node name="CollisionPolygon2D" parent="Props/Bucket" index="0"]
+polygon = PoolVector2Array( 97, 47, 108, 47, 107, 58, 98, 58 )
+
+[node name="BaselineHelper" parent="Props/Bucket" index="1"]
 position = Vector2( 0, 59 )
 
-[node name="WalkToHelper" parent="Props/Bucket" index="1"]
+[node name="WalkToHelper" parent="Props/Bucket" index="2"]
 position = Vector2( 102, 51 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Props/Bucket/Area2D" index="0"]
-polygon = PoolVector2Array( 97, 49, 99, 58, 105, 58, 108, 52, 106, 47, 101, 47 )
+[node name="Sprite" parent="Props/Bucket" index="3"]
+texture = ExtResource( 7 )
 
 [node name="Hotspots" type="Node2D" parent="."]
 
@@ -94,6 +102,7 @@ navpoly = SubResource( 1 )
 
 [node name="Barney" parent="Characters" instance=ExtResource( 10 )]
 position = Vector2( 63, 21 )
+cursor = 8
 
 [node name="Dave" parent="Characters" instance=ExtResource( 11 )]
 position = Vector2( -161, 49 )

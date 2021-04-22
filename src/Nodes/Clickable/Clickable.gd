@@ -33,6 +33,7 @@ func _unhandled_input(event):
 		if event.is_action_pressed('interact'):
 			# TODO: Verificar si hay un elemento de inventario seleccionado
 			get_tree().set_input_as_handled()
+			Data.clicked = self
 			if I.active:
 				on_item_used(I.active)
 			else:
@@ -56,20 +57,7 @@ func on_item_used(item: Item) -> void:
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░
-func _on_interact() -> void:
-	emit_signal('interacted')
-
-
-func _on_look() -> void:
-	emit_signal('looked')
-
-
-func _on_use_inventory_item() -> void:
-	pass
-
-
 func _toggle_description(display: bool) -> void:
 	set_process_unhandled_input(display)
 	Cursor.set_cursor(cursor if display else null)
 	G.emit_signal('show_info_requested', description if display else '')
-

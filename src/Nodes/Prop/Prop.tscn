@@ -2,11 +2,14 @@
 
 [ext_resource path="res://src/Nodes/Prop/Prop.gd" type="Script" id=1]
 
-[node name="Prop" type="Sprite"]
+[node name="Prop" type="Area2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -10, -10, 10, -10, 10, 10, -10, 10 )
 
 [node name="BaselineHelper" type="Line2D" parent="."]
 points = PoolVector2Array( -10000, 0, 10000, 0 )
@@ -27,4 +30,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Sprite" type="Sprite" parent="."]

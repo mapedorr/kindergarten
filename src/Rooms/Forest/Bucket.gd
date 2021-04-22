@@ -6,6 +6,7 @@ var _interacted := false
 
 func on_interact() -> void:
 	yield(C.walk_to_clicked(), 'completed')
+	C.player.face_down()
 	yield(C.player_say('Uy, un balde re-áspero'), 'completed')
 	yield(get_tree().create_timer(0.2), 'timeout')
 	get_parent().remove_child(self)

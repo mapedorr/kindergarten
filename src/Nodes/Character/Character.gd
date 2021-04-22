@@ -7,6 +7,8 @@ extends Clickable
 
 signal started_walk_to(start, end)
 
+var _looking_dir := 'r'
+
 export var text_color := Color.white
 export var walk_speed := 200.0
 export var is_player := false
@@ -33,26 +35,34 @@ func walk(target_pos: Vector2) -> void:
 
 
 func idle() -> void:
-	$AnimationPlayer.play('idle_d')
+	$AnimationPlayer.play('idle_%s' % _looking_dir)
 
 
 func face_up() -> void:
+	_looking_dir = 'u'
 	$AnimationPlayer.play('idle_u')
 
 
+func face_down() -> void:
+	_looking_dir = 'd'
+	$AnimationPlayer.play('idle_d')
+
+
 func face_left() -> void:
-	$AnimationPlayer.play('idle_r')
+	_looking_dir = 'l'
+	$AnimationPlayer.play('idle_l')
 	$Sprite.flip_h = true
 
 
 func face_right() -> void:
+	_looking_dir = 'r'
 	$AnimationPlayer.play('idle_r')
 	$Sprite.flip_h = false
 
 
 func say(dialog: String) -> void:
 	C.emit_signal('character_spoke', self, dialog)
-	$AnimationPlayer.play('talk_d')
+	$AnimationPlayer.play('talk_%s' % _looking_dir)
 
 
 # ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ métodos privados ░░░░

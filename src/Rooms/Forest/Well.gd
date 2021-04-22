@@ -11,3 +11,14 @@ func on_interact() -> void:
 
 func on_look() -> void:
 	._on_look('Qué pozo más rico...')
+
+
+func on_item_used(item: Item) -> void:
+	if item.script_name == 'Bucket':
+		yield(C.walk_to_clicked(), 'completed')
+		C.player.face_up()
+		yield(C.player_say('Adiós baldecito...'), 'completed')
+		# TODO: quitar el Bucket del inventario
+		yield(get_tree().create_timer(2.0), 'timeout')
+		yield(C.player_say('Te echaré de menos'), 'completed')
+		G.done()
