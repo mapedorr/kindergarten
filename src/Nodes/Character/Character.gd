@@ -7,7 +7,7 @@ extends Clickable
 
 signal started_walk_to(start, end)
 
-var _looking_dir := 'r'
+var _looking_dir := 'd'
 
 export var text_color := Color.white
 export var walk_speed := 200.0
